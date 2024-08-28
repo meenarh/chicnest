@@ -1,0 +1,56 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import Footer from './Footer';
+
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+}
+
+interface RelatedProductsProps {
+  productId: string;
+}
+
+async function fetchRelatedProducts(productId: string): Promise<Product[]> {
+  const res = await fetch(`https://fakestoreapi.com/products?limit=3`);
+  if (!res.ok) {
+    return [];
+  }
+  return res.json();
+}
+
+const RelatedProducts: React.FC<RelatedProductsProps> = async ({ productId }) => {
+  const relatedProducts = await fetchRelatedProducts(productId);
+
+  return (
+    <div className="mt-10">
+      <h2 className="text-2xl font-bold mb-4">Related Products</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+        {relatedProducts.map((product) => (
+          <div key={product.id} className="w-[400px] h-[600px] bg-white border border-gray-200 pt-5 hover:shadow-lg transition-shadow duration-200">
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={100}
+              height={100}
+              className="w-1/2 h-[70%] m-auto pb-5"
+            />
+            <div className="pt-3 px-3 border-t text-center flex flex-col gap-3">
+              <h3 className="text-lg font-semibold">{product.title}</h3>
+              <div className="text-lg font-normal text-black">${product.price.toFixed(2)}</div>
+              <Link href={`/product/${product.id}`} passHref>
+                <button className="text-center bg-black text-white py-2 w-[150px] h-[40px] hover:bg-white hover:text-black hover:border hover:border-black">
+                  View Product
+                </button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default RelatedProducts;
