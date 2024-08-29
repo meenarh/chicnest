@@ -1,8 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-   siteUrl: process.env.SITE_URL || 'https://www.homeaffairs.com',  // replace with your actual site URL
-   generateRobotsTxt: true,  // (optional)
-   // Exclude certain paths
+   siteUrl: process.env.SITE_URL || 'https://www.chicnest.com', 
+   generateRobotsTxt: true,
    exclude: ['/admin/*'],
    robotsTxtOptions: {
      policies: [
