@@ -5,8 +5,12 @@ interface Product {
   id: string;
   title: string;
   description: string;
-  image: string;
-  price: string;
+  price: number;
+  images: string[];
+  category: {
+    id: string;
+    name: string;
+  }
 }
 
 interface ShopProps {
@@ -14,6 +18,7 @@ interface ShopProps {
 }
 
 const Shop: React.FC<ShopProps> = ({ products }) => {
+  
   return (
     <section className="font-serif" id="shop">
       <h2 className="text-3xl font-normal mb-4 text-center underline">
@@ -28,11 +33,11 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
               } bg-white border border-gray-200 pt-5 hover:shadow-lg transition-shadow duration-200`}
             >
               <Image
-                src={product.image}
+                src={product.images?.[0]}
                 alt={product.title}
                 width={100}
                 height={100}
-                className="w-1/2 h-[70%] m-auto pb-5 rounded-full"
+                className="m-auto pb-5"
                 priority
               />
               <div className="pt-3 px-3 border-t text-center">
@@ -47,8 +52,6 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
             </div>
         ))}
       </div>
-
-      
     </section>
   );
 };

@@ -5,8 +5,13 @@ import Footer from './Footer';
 interface Product {
   id: string;
   title: string;
+  description: string;
   price: number;
-  image: string;
+  images: string[];
+  category: {
+    id: string;
+    name: string;
+  }
 }
 
 interface RelatedProductsProps {
@@ -14,7 +19,7 @@ interface RelatedProductsProps {
 }
 
 async function fetchRelatedProducts(productId: string): Promise<Product[]> {
-  const res = await fetch(`https://fakestoreapi.com/products?limit=3`);
+  const res = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=6`);
   if (!res.ok) {
     return [];
   }
@@ -31,11 +36,11 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({ productId }) =>
         {relatedProducts.map((product) => (
           <div key={product.id} className="w-[400px] h-[600px] bg-white border border-gray-200 pt-5 hover:shadow-lg transition-shadow duration-200">
             <Image
-              src={product.image}
+              src={product.images?.[0]}
               alt={product.title}
               width={100}
               height={100}
-              className="w-1/2 h-[70%] rounded-full m-auto pb-5"
+              className="m-auto pb-5"
             />
             <div className="pt-3 px-3 border-t text-center flex flex-col gap-3">
               <h3 className="text-lg font-semibold">{product.title}</h3>

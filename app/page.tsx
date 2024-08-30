@@ -9,12 +9,16 @@ interface Product {
   id: string;
   title: string;
   description: string;
-  image: string;
-  price: string;
+  price: number;
+  images: string[];
+  category: {
+    id: string;
+    name: string;
+  }
 }
 
 async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch("https://fakestoreapi.com/products?limit=6", {
+  const res = await fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=9", {
     cache: "no-store",
   });
   if (!res.ok) {
