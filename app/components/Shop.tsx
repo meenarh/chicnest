@@ -32,7 +32,7 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
                 alt={product.title}
                 width={100}
                 height={100}
-                className="w-1/2 h-[70%] m-auto pb-5"
+                className="w-1/2 h-[70%] m-auto pb-5 rounded-full"
                 priority
               />
               <div className="pt-3 px-3 border-t text-center">
@@ -47,6 +47,8 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
             </div>
         ))}
       </div>
+
+      
     </section>
   );
 };

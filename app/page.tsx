@@ -1,9 +1,9 @@
-import { Suspense } from 'react';
-import Head from 'next/head';
+import { Suspense } from "react";
+import Head from "next/head";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
-import Shop from './components/Shop';
-import Footer from './components/Footer';
+import Shop from "./components/Shop";
+import Footer from "./components/Footer";
 
 interface Product {
   id: string;
@@ -13,11 +13,12 @@ interface Product {
   price: string;
 }
 
-
 async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch('https://fakestoreapi.com/products?limit=6', { cache: 'no-store' });
+  const res = await fetch("https://fakestoreapi.com/products?limit=6", {
+    cache: "no-store",
+  });
   if (!res.ok) {
-    throw new Error('Failed to fetch products');
+    throw new Error("Failed to fetch products");
   }
   return res.json();
 }
@@ -32,24 +33,14 @@ const Home = async () => {
       </Head>
       <main className="flex min-h-screen flex-col gap-5 items-center justify-between p-8">
         <Navbar />
-        <Homepage />    
+        <Homepage />
         <Suspense fallback={<div>Loading shop section...</div>}>
           <Shop products={products} />
-        </Suspense>   
+        </Suspense>
       </main>
-      <Footer/>
-
+      <Footer />
     </>
   );
 };
 
-
-
 export default Home;
-
-
-
-
-
-
-

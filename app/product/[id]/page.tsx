@@ -55,13 +55,13 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
       </Head>
       <div className="bg-white pt-6 font-serif flex flex-col gap-8">
         <div className="flex flex-col lg:flex-row mt-5 md:ml-10 ml-5 lg:px-10">
-          <div className="w-full mt-6">
+          <div className="w-1/2 mt-6">
             <Image
               src={product.image}
               alt={product.title}
               width={300}
               height={300}
-              className="object-cover"
+              className="object-cover rounded-full"
             />
           </div>
           <div className="w-full lg:pl-10 md:mt-[150px]">
