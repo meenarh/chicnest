@@ -37,7 +37,7 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
                 alt={product.title}
                 width={100}
                 height={100}
-                className="m-auto pb-5"
+                className="w-full h-auto m-auto pb-5"
                 priority
               />
               <div className="pt-3 px-3 border-t text-center">
@@ -47,7 +47,7 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
                 <button className="mt-4 text-center bg-black text-white py-2 w-[150px] h-[40px] hover:bg-white hover:text-black hover:border hover:border-black">
                   View Product
                 </button>
-              </Link>
+                </Link>
               </div>
             </div>
         ))}
