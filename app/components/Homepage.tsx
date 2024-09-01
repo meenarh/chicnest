@@ -1,15 +1,24 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
-type Props = {}
+type Props = {};
 
 const Homepage = (props: Props) => {
   return (
-   <div className='bg-[url(/home.png)] bg-cover h-screen bg-center w-screen text-center' id='home'>
-      <h4 className='bg-white text-6xl font-serif font-normal text-[#FF2E00] md:mt-[350px] mt-[350px]'>Discover Trendsetting Fashion at ChicNest</h4>
-      <button className='px-6 py-4 text-[#FF2E00] border border-[#FF2E00] mt-5 hover:bg-[#FF2E00] hover:text-white'><Link href='#shop'>View More</Link></button>
-   </div>
-  )
-}
+    <div
+      className="bg-[url(/home.png)] bg-blend-darken bg-cover h-[90vh] bg-center w-screen text-center"
+      id="home"
+    >
+      <div className="md:mt-[250px] mt-[240px]">
+        <h4 className="tracking-tightest uppercase md:text-6xl text-4xl font-serif font-semibold text-white my-auto">
+          Discover Trendsetting <br /> Fashion at ChicNest
+        </h4>
+        <button className="px-6 py-4 font-medium text-black bg-white rounded-md mt-5 hover:bg-black hover:text-white">
+          <Link href="/products">Shop Now</Link>
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default Homepage
+export default Homepage;

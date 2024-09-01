@@ -35,7 +35,7 @@ export default function ProductForm({
     });
 
     try {
-      const response = await fetch("https://api.escuelajs.co/api/v1/products/", {
+      const response = await fetch("https://api.escuelajs.co/api/v1/products", {
         method: "POST",
         body: formData,
       });
@@ -67,7 +67,7 @@ export default function ProductForm({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            className="border border-black p-3 md:w-[30%] w-full rounded-md"
+            className="border border-black p-3 md:w-[30%] w-full"
             required
           />
           <label htmlFor="">Product Price</label>
@@ -76,7 +76,7 @@ export default function ProductForm({
             value={price}
             onChange={(e) => setPrice(parseFloat(e.target.value))}
             placeholder="Price"
-            className="border border-black p-3 md:w-[30%] w-full rounded-md"
+            className="border border-black p-3 md:w-[30%] w-full"
             required
           />
           <label htmlFor="">Product Description</label>
@@ -84,7 +84,7 @@ export default function ProductForm({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
-            className="border border-black p-3 md:w-[30%] w-full rounded-md"
+            className="border border-black p-3 md:w-[30%] w-full"
             required
           />
           <label htmlFor="">Product Category</label>
@@ -93,7 +93,7 @@ export default function ProductForm({
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             placeholder="Category"
-            className="border border-black p-3 md:w-[30%] w-full rounded-md"
+            className="border border-black p-3 md:w-[30%] w-full"
             required
           />
           <label htmlFor="">Product Image</label>
@@ -101,9 +101,9 @@ export default function ProductForm({
             type="file"
             multiple
             onChange={handleFileChange}
-            className="border border-black p-3 md:w-[30%] w-full rounded-md"
+            className="border border-black p-3 md:w-[30%] w-full"
           />
-          <button type="submit" className="bg-black md:w-[30%] w-full rounded-md text-white p-4">
+          <button type="submit" className="bg-black md:w-[30%] w-full text-white p-4">
             Add Product
           </button>
         </form>

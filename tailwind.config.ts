@@ -7,6 +7,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    letterSpacing:{
+      tightest: '-0.05em',
+    },
     extend: {
       fontFamily: {
         'serif': ['Satoshi', 'sans-serif']

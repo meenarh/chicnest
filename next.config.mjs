@@ -14,7 +14,7 @@ const nextConfig = {
       return [
         {
           source: '/api/:path*',
-          destination: 'https://api.escuelajs.co/api/v1/:path*', // Proxy to the API
+          destination: 'https://api.escuelajs.co/api/v1/:path*',
         },
       ];
     },

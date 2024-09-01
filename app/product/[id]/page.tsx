@@ -8,18 +8,9 @@ import Footer from "@/app/components/Footer";
 import Head from "next/head";
 import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
+import { useCart } from "@/app/context/cartContext";
+import { Product } from "@/app/types/cart"; 
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  images: string[];
-  category: {
-    id: string;
-    name: string;
-  };
-}
 
 async function fetchProduct(id: string): Promise<Product | null> {
   const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
@@ -37,6 +28,7 @@ interface ProductPageProps {
 
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { addToCart } = useCart();
 
   const product = await fetchProduct(params.id);
 
@@ -49,12 +41,19 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 
   const handleDelete = async (id: number) => {
     try {
-      await fetch(`/api/products/${id}`, {
+      await fetch(`https://api.escuelajs.co/api/v1/products${id}`, {
         method: "DELETE",
       });
       setProducts(products.filter((product) => product.id !== id));
     } catch (error) {
       console.error("Error deleting product:", error);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product); 
+      console.log("Product added to cart:", product);
     }
   };
 
@@ -71,7 +70,7 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
         <meta name="twitter:description" content={product.description} />
         <meta name="twitter:image" content={singleImage} />
       </Head>
-      <div className="bg-white pt-6 font-serif flex flex-col gap-8 p-10">
+      <div className="bg-white pt-6 font-serif flex flex-col gap-8 md:p-10 p-5">
         <Navbar />
         <div className="flex flex-col lg:flex-row mt-5 md:ml-10 ml-5 lg:px-10">
           <div className="w-1/2 mt-6">
@@ -80,10 +79,10 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
               alt={product.title}
               width={300}
               height={300}
-              className="object-cover w-full h-auto"
+              className="object-cover w-full md:h-auto h-full"
             />
           </div>
-          <div className="w-full lg:pl-10 md:mt-[150px]">
+          <div className="w-full lg:pl-10 md:mt-5">
             <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
             <p className="text-gray-700 text-lg mb-4">{product.description}.</p>
             <span className="capitalize">{product.category.name}</span>
@@ -91,22 +90,29 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
               ${product.price.toFixed(2)}
             </div>
             <div className="mt-4">
+            <button
+                onClick={handleAddToCart}
+                className="bg-black text-white p-3 mr-2 rounded-sm"
+              >
+                Add to Cart
+              </button>
               <Link
                 href={`/manage/edit/${product.id}`}
-                className="border border-black p-2"
+                className="border border-black p-3 rounded-sm"
               >
                 Edit
               </Link>
               <button
                 onClick={() => handleDelete(product.id)}
-                className="bg-red-500 border border-red-500 text-white p-2 ml-2"
+                className="bg-red-500 border border-red-500 text-white p-3 ml-2 rounded-sm"
               >
                 Delete
               </button>
+              
             </div>
           </div>
         </div>
-        <div className="lg:px-10 px-5">
+        <div className="lg:px-10">
           <RelatedProducts productId={params.id} />
         </div>
       </div>

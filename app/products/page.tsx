@@ -20,7 +20,7 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
+    fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=45")
       .then((response) => response.json())
       .then((data: Product[]) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
@@ -47,7 +47,7 @@ export default function ShopPage() {
         <section className="flex justify-end mb-7">
           <Link
             href="/manage"
-            className="border border-black p-3 text-end justify-end"
+            className="border border-black p-3 text-end justify-end rounded-md hover:bg-black hover:text-white"
           >
             Add New Product
           </Link>
@@ -57,7 +57,7 @@ export default function ShopPage() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white border border-gray-200 pt-5 hover:shadow-lg transition-shadow duration-200"
+              className="bg-white pt-5"
             >
               {product.images && product.images.length > 0 && (
                 <img
@@ -67,7 +67,7 @@ export default function ShopPage() {
                 />
               )}
               <div className="pt-3 px-3 border-t text-center">
-                <h3 className="text-lg font-semibold">{product.title}</h3>
+                <h3 className="text-lg font-medium">{product.title}</h3>
                 <span className="capitalize">{product.category.name}</span>
                 <p className="text-lg font-normal text-black">
                   ${product.price}
@@ -76,20 +76,20 @@ export default function ShopPage() {
 
               <div className="m-4 flex flex-row gap-3 justify-between">
                 <Link href={`/product/${product.id}`} passHref>
-                  <button className="mt-4 text-center bg-black text-white py-2 w-[150px] h-[40px] hover:bg-white hover:text-black hover:border hover:border-black">
+                <button className="mt-4 text-center font-medium bg-black text-white py-2 w-[140px] h-[48px] rounded-md hover:bg-white hover:text-black hover:border hover:border-black">
                     View Product
                   </button>
                 </Link>
                 <div className="flex flex-row gap-4">
                   <Link
                     href={`/manage/edit/${product.id}`}
-                    className="border border-black p-2 mt-4"
+                    className="border border-black p-3 mt-4 rounded-sm"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="bg-red-500 border border-red-500 text-white p-2 mt-4"
+                    className="bg-red-500 border border-red-500 text-white p-2 mt-4 rounded-sm"
                   >
                     Delete
                   </button>

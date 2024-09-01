@@ -4,6 +4,7 @@ import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 import Shop from "./components/Shop";
 import Footer from "./components/Footer";
+import Categories from "./components/Categories";
 
 interface Product {
   id: string;
@@ -41,6 +42,7 @@ const Home = async () => {
         <Suspense fallback={<div>Loading shop section...</div>}>
           <Shop products={products} />
         </Suspense>
+        <Categories />
       </main>
       <Footer />
     </>

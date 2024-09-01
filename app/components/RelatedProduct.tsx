@@ -34,7 +34,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({ productId }) =>
       <h2 className="text-2xl font-bold mb-4">Related Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {relatedProducts.map((product) => (
-          <div key={product.id} className="w-[400px] h-[600px] bg-white border border-gray-200 pt-5 hover:shadow-lg transition-shadow duration-200">
+          <div key={product.id} className="w-[400px] h-[600px] bg-white pt-5">
             <Image
               src={product.images?.[0]}
               alt={product.title}
@@ -42,11 +42,11 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({ productId }) =>
               height={100}
               className="w-full h-auto m-auto pb-5"
             />
-            <div className="pt-3 px-3 border-t text-center flex flex-col gap-3">
+            <div className="pt-3 px-3 text-left flex flex-col gap-3">
               <h3 className="text-lg font-semibold">{product.title}</h3>
               <div className="text-lg font-normal text-black">${product.price.toFixed(2)}</div>
-              <Link href={`/product/${product.id}`} passHref>
-                <button className="text-center bg-black text-white py-2 w-[150px] h-[40px] hover:bg-white hover:text-black hover:border hover:border-black">
+              <Link href={`/product/${product.id}`} passHref className='text-left'>
+              <button className="mt-4 text-center font-medium bg-black text-white py-2 w-[140px] h-[48px] rounded-md hover:bg-white hover:text-black hover:border hover:border-black">
                   View Product
                 </button>
               </Link>

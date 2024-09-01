@@ -9,10 +9,10 @@ const Footer = (props: Props) => {
       <h3 className='text-white text-4xl'>ChicNest</h3>
       <ul className="flex flex-row justify-between md:gap-10 gap-8 font-serif md:text-lg text-sm text-white">
       <li className="hover:underline">
-        <Link href="#">Home</Link>
+        <Link href="/">Home</Link>
       </li>
       <li className="hover:underline">
-        <Link href="#">Shop</Link>
+        <Link href="/products">Shop</Link>
       </li>
       <li className="hover:underline">
         <Link href="#">Blog</Link>
