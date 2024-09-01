@@ -13,6 +13,7 @@ In this project, SEO was handled through several key practices to ensure better 
 
 - Open Graph Tags:
    Social Media Optimization: Open Graph tags are included to enhance how the content appears when shared on social media platforms. This is handled by adding appropriate <meta property="og:*" content="*"/> tags in the <Head> section of each page to control the appearance of links.
+   
 - Dynamic SEO Content:
    Product Pages: The SEO content for each product page is dynamically generated based on the product's details, such as its title, description, and other relevant information. This is achieved by setting the meta tags dynamically within the product details page component.
 
