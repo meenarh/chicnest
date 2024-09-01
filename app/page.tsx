@@ -39,7 +39,7 @@ const Home = async () => {
       <main className="flex min-h-screen flex-col gap-5 items-center justify-between p-8">
         <Navbar />
         <Homepage />
-        <Suspense fallback={<div>Loading shop section...</div>}>
+        <Suspense fallback={<div className="h-screen">Loading shop section...</div>}>
           <Shop products={products} />
         </Suspense>
         <Categories />

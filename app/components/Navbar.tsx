@@ -8,7 +8,8 @@ type Props = {};
 const Navbar = (props: Props) => {
 
   return (
-    <div className="flex flex-row justify-between gap-5">
+    <div className="w-full flex flex-row justify-between gap-5">
+      <h3 className='text-black uppercase text-xl text-left font-medium'>ChicNest</h3>
       <ul className="flex flex-row justify-between md:gap-10 gap-8 font-serif md:text-lg text-sm">
         <li className="hover:underline">
           <Link href="/">Home</Link>

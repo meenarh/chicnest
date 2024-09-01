@@ -17,13 +17,15 @@ const categories = [
 
 const Category = ({ name, imageUrl }: CategoryProps) => {
   return (
-    <div className="font-serif flex flex-col items-center justify-center py-4  bg-white hover:cursor-pointer">
-      <img
-        src={imageUrl}
-        alt={name}
-        className="w-full h-full  mb-2 rounded-md"
-      />
-      <p className="text-lg font-medium">{name}</p>
+    <div className="snap-x">
+      <div className="snap-center w-[300px] h-[300px] hover:cursor-pointer">
+        <img
+          src={imageUrl}
+          alt={name}
+          className="w-full h-full mb-2 rounded-md object-cover"
+        />
+        <p className="text-lg font-medium text-left">{name}</p>
+      </div>
     </div>
   );
 };
@@ -31,9 +33,9 @@ const Category = ({ name, imageUrl }: CategoryProps) => {
 const Categories = () => {
   return (
     <div className="p-10 font-serif">
-        <h2 className="text-3xl font-medium mb-4 text-center">Categories</h2>
+      <h2 className="text-3xl font-medium mb-4 text-center">Categories</h2>
 
-      <div className="flex overflow-x-scroll space-x-4 p-4">
+      <div className="flex gap-4 p-4 text-left max-w-full">
         {categories.map((category) => (
           <Category
             key={category.name}

@@ -6,7 +6,7 @@ type Props = {}
 const Footer = (props: Props) => {
   return (
     <div className='p-10 flex flex-col lg:flex-row gap-5 justify-between font-serif bg-black w-full h-fit'>
-      <h3 className='text-white text-4xl'>ChicNest</h3>
+      <h3 className='text-white uppercase text-xl text-left font-medium'>ChicNest</h3>
       <ul className="flex flex-row justify-between md:gap-10 gap-8 font-serif md:text-lg text-sm text-white">
       <li className="hover:underline">
         <Link href="/">Home</Link>

@@ -37,10 +37,14 @@ export default function ShopPage() {
     }
   };
 
+  if (!products) {
+    return <p className="h-screen text-center">Loading...</p>;
+  }
+
   return (
-    <div>
-      <div className="font-serif md:p-10 p-5">
+    <div className="overflow-x-hidden">
         <Navbar />
+      <div className="font-serif md:p-10 p-5">
         <h1 className="text-center text-2xl font-semibold text-black underline m-8">
           Shop
         </h1>
