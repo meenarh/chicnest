@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url("https://fonts.cdnfonts.com/css/satoshi");
 
 @tailwind base;
 @tailwind components;
@@ -29,7 +29,17 @@ body {
 } */
 
 @layer utilities {
+  .spinner-border {
+    @apply border-t-transparent border-blue-500;
+  }
   .text-balance {
     text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

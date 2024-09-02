@@ -74,9 +74,7 @@ export default function EditProduct({ params }: { params: { id: string } }) {
     }
   };
 
-  if (!product) {
-    return <p className="h-screen text-center">Loading...</p>;
-  }
+  
 
   return (
     <>

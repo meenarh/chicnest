@@ -7,7 +7,7 @@ User-agent: *
 Disallow: /admin
 
 # Host
-Host: https://www.homeaffairs.com
+Host: https://www.chicnest.com
 
 # Sitemaps
-Sitemap: https://www.homeaffairs.com/sitemap.xml
+Sitemap: https://www.chicnest.com/sitemap.xml

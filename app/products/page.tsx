@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 type Product = {
   id: number;
@@ -18,6 +19,14 @@ type Product = {
 
 export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=45")
@@ -37,12 +46,14 @@ export default function ShopPage() {
     }
   };
 
-  if (!products) {
-    return <p className="h-screen text-center">Loading...</p>;
+ 
+  if (loading) {
+    return <Loader />;
   }
 
+
   return (
-    <div className="overflow-x-hidden">
+    <div className="min-h-screen items-center justify-between p-8">
         <Navbar />
       <div className="font-serif md:p-10 p-5">
         <h1 className="text-center text-2xl font-semibold text-black underline m-8">

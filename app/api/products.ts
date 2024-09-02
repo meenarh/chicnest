@@ -32,3 +32,6 @@ export async function fetchProducts() {
    return response.json();
  }
  
+
+
+ 

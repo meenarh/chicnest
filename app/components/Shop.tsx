@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Loader from "./Loader";
 
 interface Product {
   id: string;
@@ -18,6 +22,18 @@ interface ShopProps {
 }
 
 const Shop: React.FC<ShopProps> = ({ products }) => {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
   
   return (
     <section className="font-serif p-16 " id="shop">

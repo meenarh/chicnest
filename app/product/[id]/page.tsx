@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { notFound } from "next/navigation";
 import RelatedProducts from "@/app/components/RelatedProduct";
 import Footer from "@/app/components/Footer";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
 import { useCart } from "@/app/context/cartContext";
 import { Product } from "@/app/types/cart"; 
+import Loader from "@/app/components/Loader";
 
 
 async function fetchProduct(id: string): Promise<Product | null> {
@@ -28,11 +29,20 @@ interface ProductPageProps {
 
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
 
   const product = await fetchProduct(params.id);
 
-  const singleImage = product ? product.images[0] : "";
+  const singleImage = product ? product.images[0] : "https://i.imgur.com/ae0AEYn.jpeg";
 
   if (!product) {
     console.log("Product not found", params.id);
@@ -56,6 +66,12 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
       console.log("Product added to cart:", product);
     }
   };
+
+
+  if (loading) {
+    return <Loader />;
+  }
+
 
   return (
     <>

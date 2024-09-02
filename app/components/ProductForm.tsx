@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -14,6 +15,8 @@ export default function ProductForm({
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [images, setImages] = useState<File[]>([]);
+
+  const router = useRouter(); 
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -35,18 +38,16 @@ export default function ProductForm({
     });
 
     try {
-      const response = await fetch("https://api.escuelajs.co/api/v1/products", {
+      const response = await fetch("https://api.escuelajs.co/api/v1/products/", {
         method: "POST",
         body: formData,
       });
 
       if (response.ok) {
-        onAddProduct(await response.json());
-        setTitle("");
-        setPrice(0);
-        setDescription("");
-        setCategory("");
-        setImages([]);
+        const newProduct = await response.json();
+        onAddProduct(newProduct);
+      
+        router.push(`/product/${newProduct.id}`);
       } else {
         console.error("Error adding product:", response.statusText);
       }
@@ -59,7 +60,7 @@ export default function ProductForm({
     <>
       <div className="font-serif p-10">
         <Navbar />
-        <form onSubmit={handleSubmit} className="mb-4 flex flex-col gap-3 p-5">
+        <form onSubmit={handleSubmit} className="mb-4 mx-auto flex flex-col gap-3 p-5">
           <h3 className="text-2xl ">Add Product Details</h3>
           <label htmlFor="">Product Name</label>
           <input
@@ -67,7 +68,7 @@ export default function ProductForm({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            className="border border-black p-3 md:w-[30%] w-full"
+            className="border border-black p-3 md:w-[30%] w-full rounded-md"
             required
           />
           <label htmlFor="">Product Price</label>
@@ -76,7 +77,7 @@ export default function ProductForm({
             value={price}
             onChange={(e) => setPrice(parseFloat(e.target.value))}
             placeholder="Price"
-            className="border border-black p-3 md:w-[30%] w-full"
+            className="border border-black p-3 md:w-[30%] w-full rounded-md"
             required
           />
           <label htmlFor="">Product Description</label>
@@ -84,7 +85,7 @@ export default function ProductForm({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
-            className="border border-black p-3 md:w-[30%] w-full"
+            className="border border-black p-3 md:w-[30%] w-full rounded-md"
             required
           />
           <label htmlFor="">Product Category</label>
@@ -93,7 +94,7 @@ export default function ProductForm({
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             placeholder="Category"
-            className="border border-black p-3 md:w-[30%] w-full"
+            className="border border-black p-3 md:w-[30%] w-full rounded-md"
             required
           />
           <label htmlFor="">Product Image</label>
@@ -101,14 +102,13 @@ export default function ProductForm({
             type="file"
             multiple
             onChange={handleFileChange}
-            className="border border-black p-3 md:w-[30%] w-full"
+            className="border border-black p-3 md:w-[30%] w-full rounded-md"
           />
-          <button type="submit" className="bg-black md:w-[30%] w-full text-white p-4">
+          <button type="submit" className="bg-black md:w-[30%] w-full rounded-md text-white p-4">
             Add Product
           </button>
         </form>
       </div>
-
       <Footer />
     </>
   );
