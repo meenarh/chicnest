@@ -50,7 +50,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
       await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
         method: "DELETE",
       });
-      // Ideally, navigate back to the product list or handle the UI accordingly
     } catch (error) {
       console.error("Error deleting product:", error);
     }
