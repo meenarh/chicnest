@@ -12,7 +12,6 @@ import { useCart } from "@/app/context/cartContext";
 import { Product } from "@/app/types/cart"; 
 import Loader from "@/app/components/Loader";
 
-
 async function fetchProduct(id: string): Promise<Product | null> {
   const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
     cache: "no-store",
@@ -27,34 +26,31 @@ interface ProductPageProps {
   params: { id: string };
 }
 
-const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
 
-
   useEffect(() => {
-    setTimeout(() => {
+    const fetchProductData = async () => {
+      const product = await fetchProduct(params.id);
+      if (!product) {
+        notFound();
+        return;
+      }
+      setProduct(product);
       setLoading(false);
-    }, 2000);
-  }, []);
+    };
 
-
-  const product = await fetchProduct(params.id);
-
-  const singleImage = product ? product.images[0] : "https://i.imgur.com/ae0AEYn.jpeg";
-
-  if (!product) {
-    console.log("Product not found", params.id);
-    notFound();
-  }
+    fetchProductData();
+  }, [params.id]);
 
   const handleDelete = async (id: number) => {
     try {
-      await fetch(`https://api.escuelajs.co/api/v1/products${id}`, {
+      await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
         method: "DELETE",
       });
-      setProducts(products.filter((product) => product.id !== id));
+      // Ideally, navigate back to the product list or handle the UI accordingly
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -62,16 +58,20 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product); 
+      addToCart(product);
       console.log("Product added to cart:", product);
     }
   };
-
 
   if (loading) {
     return <Loader />;
   }
 
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  const singleImage = product.images[0] || "https://i.imgur.com/ae0AEYn.jpeg";
 
   return (
     <>
@@ -106,7 +106,7 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
               ${product.price.toFixed(2)}
             </div>
             <div className="mt-4">
-            <button
+              <button
                 onClick={handleAddToCart}
                 className="bg-black text-white p-3 mr-2 rounded-sm"
               >
@@ -124,7 +124,6 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
               >
                 Delete
               </button>
-              
             </div>
           </div>
         </div>
