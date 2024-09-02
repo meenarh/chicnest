@@ -76,7 +76,7 @@ export default function ShopPage() {
             >
               {product.images && product.images.length > 0 && (
                 <img
-                  src={product.images[0]}
+                  src={product.images[0] ?? 'https://i.imgur.com/BZrIEmb.jpeg'}
                   alt={product.title}
                   className="w-full h-auto"
                 />

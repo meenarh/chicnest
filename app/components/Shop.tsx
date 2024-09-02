@@ -49,7 +49,7 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
               } bg-white pt-5`}
             >
               <Image
-                src={product.images?.[0]}
+                src={product.images?.[0] ?? 'https://i.imgur.com/BZrIEmb.jpeg'}
                 alt={product.title}
                 width={100}
                 height={100}

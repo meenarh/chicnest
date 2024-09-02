@@ -30,7 +30,7 @@ const CartPage: React.FC = () => {
                     className="mb-4 border-y p-4 md:w-[80%] w-full h-fit flex flex-row justify-between gap-3"
                   >
                     <Image
-                      src={product.images?.[0]}
+                      src={product.images?.[0] ?? 'https://i.imgur.com/BZrIEmb.jpeg'}
                       alt={product.title}
                       width={100}
                       height={100}
