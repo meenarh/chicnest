@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     letterSpacing:{
-      tightest: '-0.05em',
+      tighter: '-0.05em',
     },
     extend: {
       fontFamily: {
