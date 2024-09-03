@@ -19,7 +19,7 @@ interface Product {
 }
 
 async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=9", {
+  const res = await fetch("https://api.escuelajs.co/api/v1/products?offset=1&limit=9", {
     cache: "no-store",
   });
   if (!res.ok) {

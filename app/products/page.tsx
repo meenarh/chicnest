@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -27,9 +28,8 @@ export default function ShopPage() {
     }, 2000);
   }, []);
 
-
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=45")
+    fetch("https://api.escuelajs.co/api/v1/products?offset=1&limit=46")
       .then((response) => response.json())
       .then((data: Product[]) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
@@ -69,16 +69,21 @@ export default function ShopPage() {
         </section>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <div
               key={product.id}
-              className="bg-white pt-5"
+              className={`relative w-[400px] h-[600px] ${
+                index === products.length - 1 ? "col-span-1 row-span-2" : ""
+              } bg-white pt-5`}
             >
               {product.images && product.images.length > 0 && (
-                <img
+                <Image
                   src={product.images[0] ?? 'https://i.imgur.com/BZrIEmb.jpeg'}
                   alt={product.title}
-                  className="w-full h-auto"
+                  width={100}
+                  height={100}
+                  className="w-full h-auto m-auto"
+                  priority
                 />
               )}
               <div className="pt-3 px-3 border-t text-center">
